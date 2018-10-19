@@ -1,0 +1,21 @@
+{
+  "name": "prime-table",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "main": "bundles/prime-table.umd.js",
+  "module": "fesm5/prime-table.js",
+  "es2015": "fesm2015/prime-table.js",
+  "esm5": "esm5/prime-table.js",
+  "esm2015": "esm2015/prime-table.js",
+  "fesm5": "fesm5/prime-table.js",
+  "fesm2015": "fesm2015/prime-table.js",
+  "typings": "prime-table.d.ts",
+  "metadata": "prime-table.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}
