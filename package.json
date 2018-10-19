@@ -1,6 +1,6 @@
 {
   "name": "prime-table",
-  "version": "3.0.0",
+  "version": "0.0.0-semantically-released",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
