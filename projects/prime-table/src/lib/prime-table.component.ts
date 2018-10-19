@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'b-prime-table',
   template: `
     <p>
-      prime-table works!
+      Testing npm publish
     </p>
   `,
   styles: []
