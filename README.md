@@ -1,4 +1,5 @@
 
+
 # PrimeTable
 [![npm](https://img.shields.io/npm/v/prime-table.svg)](https://www.npmjs.com/package/prime-table)
 [![Build Status](https://travis-ci.com/beerran/prime-table.svg?branch=master)](https://travis-ci.com/beerran/prime-table)
@@ -6,6 +7,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
+### [View example](https://beerran.github.io/prime-table/)
 
 ## Dependencies
 * [PrimeNG](https://github.com/primefaces/primeng) - Contains components wrapped in this library
