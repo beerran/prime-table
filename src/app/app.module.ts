@@ -1,9 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { PrimeTableModule } from 'prime-table';
 
 import { AppComponent } from './app.component';
-import { PrimeTableModule } from 'prime-table';
-import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     PrimeTableModule,
     SnotifyModule
   ],
