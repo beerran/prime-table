@@ -1,3 +1,5 @@
+
+# PrimeTable
 [![npm](https://img.shields.io/npm/v/prime-table.svg)](https://www.npmjs.com/package/prime-table)
 [![Build Status](https://travis-ci.com/beerran/prime-table.svg?branch=master)](https://travis-ci.com/beerran/prime-table)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
@@ -5,31 +7,86 @@
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
 
-# PrimeTableDemo
+## Dependencies
+* [PrimeNG](https://github.com/primefaces/primeng) - Contains components wrapped in this library
+	* `npm i primeng primeicons --save`
+* [Bootstrap](https://github.com/twbs/bootstrap) - Base styling
+	* `npm i bootstrap --save`
+* [FontAwesome](https://github.com/FortAwesome/Font-Awesome) - Additional icons used instead of PrimeNG defaults
+	* `npm i @fortawesome/fontawesome-free --save`
+* **All dependencies:** 
+	* `npm i primeng primeicons bootstrap @fortawesome/fontawesome-free --save`
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
+## Installation
+Install with:
 
-## Development server
+    npm install prime-table --save
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Include styles in build;
 
-## Code scaffolding
+    ...
+    	"styles": [
+    		"node_modules/prime-table/scss/prime-table-styles.scss",
+    		"src/styles.scss"
+    	],
+    ...
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+or in own .scss-file:
 
-## Build
+    @import  '~node_modules/prime-table/scss/prime-table-styles';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Import BrowserAnimationsModule and PrimeTableModule in your App.Module:
 
-## Running unit tests
+    import { BrowserModule } from '@angular/platform-browser';
+    import { NgModule } from '@angular/core';
+    import { AppComponent } from './app.component';
+    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+    import { PrimeTableModule } from 'prime-table';
+    
+    @NgModule({
+      declarations: [
+        AppComponent
+      ],
+      imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        PrimeTableModule
+      ],
+      providers: [],
+      bootstrap: [AppComponent]
+    })
+    export class AppModule { }
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Usage
+Use the template selector `<prime-table></prime-table>` where you want to display your table.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Inputs:
+|Name|Usage|
+|--|--|
+|columns|Column configuration for current table|
+|data|Data for current table. Array of objects. Each object needs to have the properties defined in "columns"|
+|config|Combined columns and data-input, taking a a single PrimeTableConfig as input, containing all configuration needed|
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# prime-table
+### Outputs:
+|Name|Usage|
+|--|--|
+|add()|If addButton is set to true in your config object, an Add New-button will appear. When clicked, this event is emitted|
+|edit()|If editButton is set to true in your config object, each row in the table will receive an additional column with an edit button. When clicked, this event is emitted where $event is the clicked item in the data array|
+|archive()|If archiveButton is set to true in your config object, each row in the table will receive an additional column with an archive button. When clicked, this event is emitted where $event is the clicked item in the data array|
+
+### PrimeTableConfig object
+
+> Documentation still to be written... Basically a bunch of booleans determining different functionality for the table.
+
+|Property|Usage|
+|--|--|
+|x|y|
+
+### PrimeTableColumn object
+> Documentation still to be written... Basically a bunch of booleans determining different functionality for each individual column in the table.
+
+|Property|Usage|
+|--|--|
+|x|y|
