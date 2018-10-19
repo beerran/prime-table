@@ -1,0 +1,58 @@
+{
+    "extends": [
+        "config:base"
+    ],
+    "baseBranch": "develop",
+    "packageRules": [{
+            "packagePatterns": [
+                "prime-table"
+            ],
+            "rangeStrategy": "replace"
+        },
+        {
+            "packagePatterns": [
+                "prime-table"
+            ],
+            "depTypeList": [
+                "devDependencies"
+            ],
+            "rangeStrategy": "pin"
+        },
+        {
+            "packagePatterns": [
+                "prime-table"
+            ],
+            "depTypeList": [
+                "peerDependencies"
+            ],
+            "rangeStrategy": "widen"
+        },
+        {
+            "packagePatterns": [
+                "prime-table-demo"
+            ],
+            "rangeStrategy": "replace",
+            "semanticCommitType": "chore"
+        },
+        {
+            "packagePatterns": [
+                "prime-table-demo"
+            ],
+            "depTypeList": [
+                "devDependencies"
+            ],
+            "rangeStrategy": "pin",
+            "semanticCommitType": "chore"
+        },
+        {
+            "packagePatterns": [
+                "prime-table-demo"
+            ],
+            "depTypeList": [
+                "peerDependencies"
+            ],
+            "rangeStrategy": "widen",
+            "semanticCommitType": "chore"
+        }
+    ]
+}
