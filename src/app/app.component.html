@@ -1,2 +1,9 @@
-<h1>Prime Table</h1>
-<b-prime-table></b-prime-table>
+<div class="container">
+    <div class="row my-4">
+        <div class="col">
+            <h1>Prime Table</h1>
+            <b-prime-table [config]="tableConfig" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)"></b-prime-table>
+        </div>
+    </div>
+</div>
+<ng-snotify></ng-snotify>
