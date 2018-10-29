@@ -4,7 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve --open",
-        "build": "ng build --base-href /prime-table-demo/ --prod",
+        "build": "ng build --base-href /prime-table/ --prod",
         "build-lib": "ng build prime-table",
         "prebuild-lib": "rimraf dist/prime-table",
         "postbuild-lib": "npm run copy-md && npm run copy-scss",
