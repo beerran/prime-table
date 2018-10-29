@@ -12,29 +12,44 @@ import { SnotifyService } from 'ng-snotify';
 export class AppComponent implements OnInit {
   constructor(private snotify: SnotifyService) { }
 
-  tableConfig = new PrimeTableConfig('standard');
+  tableConfigReorderableRows = new PrimeTableConfig('standard');
+  tableConfigSortableRows = new PrimeTableConfig('standard');
 
   ngOnInit() {
-    this.tableConfig.archiveButton = true;
-    this.tableConfig.setColumns([
-      new PrimeTableColumn('Order', 'order', false, true),
-      new PrimeTableColumn('Id', 'id'),
-      new PrimeTableColumn('Name', 'name', true),
-      new PrimeTableColumn('Age', 'age', true),
-      new PrimeTableColumn('E-mail', 'email', true)
-    ]);
+    this.tableConfigReorderableRows.archiveButton = true;
+    this.tableConfigReorderableRows.setColumns(this.getColumns(true));
+    this.tableConfigReorderableRows.setData(this.getData());
 
-    this.tableConfig.setData([
+    this.tableConfigSortableRows.orderBy = {
+      key: 'age',
+      type: 'asc'
+    };
+    this.tableConfigSortableRows.setColumns(this.getColumns());
+    this.tableConfigSortableRows.setData(this.getData());
+  }
+
+  onAdd = (event: any) => this.snotify.success('Callback to add item called! Item ID: ' + event.id, 'add() called');
+  onEdit = (event: any) => this.snotify.info('Callback to edit item called! Item ID: ' + event.id, 'edit() called');
+  onArchive = (event: any) => this.snotify.warning('Callback to archive item called! Item ID: ' + event.id, 'archive() called');
+
+  private getColumns = (reorderable = false) => {
+    return [
+      new PrimeTableColumn('Order', 'order', false, reorderable),
+      new PrimeTableColumn('Id', 'id'),
+      new PrimeTableColumn('Name', 'name', reorderable),
+      new PrimeTableColumn('Age', 'age', reorderable),
+      new PrimeTableColumn('E-mail', 'email', reorderable)
+    ];
+  }
+
+  private getData = () => {
+    return [
       {id: 2, order: 1, name: 'Emil Larsson', age: 24, email: 'emil.larsson@seb.se'},
       {id: 3, order: 2, name: 'Jan Lövgren', age: 46, email: 'jan.lovgren@seb.se'},
       {id: 6, order: 5, name: 'Fredrik Lundberg', age: 43, email: 'fredrik.lundberg@seb.se'},
       {id: 1, order: 4, name: 'Christian Bleckert', age: 41, email: 'christian.bleckert@seb.se'},
       {id: 4, order: 3, name: 'Joel Forsgren', age: 34, email: 'joel.forsgren@seb.se'},
       {id: 5, order: 6, name: 'Unknown User', age: 0, email: 'name@example.com'}
-    ]);
+    ];
   }
-
-  onAdd = (event: any) => this.snotify.success('Callback to add item called! Item ID: ' + event.id, 'add() called');
-  onEdit = (event: any) => this.snotify.info('Callback to edit item called! Item ID: ' + event.id, 'edit() called');
-  onArchive = (event: any) => this.snotify.warning('Callback to archive item called! Item ID: ' + event.id, 'archive() called');
 }

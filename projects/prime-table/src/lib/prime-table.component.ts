@@ -45,8 +45,7 @@ export class PrimeTableComponent implements OnInit {
   @Input('data')
   set data(data: any[] | TreeNode[]) {
     if (data) {
-      this._config.drilldown ? this._config.setTreeData(data)
-      : this._config.setData(data);
+      this._config.drilldown ? this._config.setTreeData(data) : this._config.setData(data);
       this.setupData();
     }
   }
@@ -71,16 +70,25 @@ export class PrimeTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.hasReorderableColumn) {
       // ToDo: Fix for drilldown tables
       this.dataLoaded.subscribe(dataLoaded => {
         if (dataLoaded) {
-          const reorderableColumn = this._config.columns.find(col => col.reorderable === true);
-          this._config.sortable = false;
-          (this._config.data as any[]).sort((item1, item2) => item1[reorderableColumn.name] - item2[reorderableColumn.name]);
+          if (this.hasReorderableColumn) {
+            const reorderableColumn = this._config.columns.find(col => col.reorderable === true);
+            this._config.sortable = false;
+            (this._config.data as any[]).sort((first, second) => first[reorderableColumn.name] - second[reorderableColumn.name]);
+          }
+
+          if (this._config.orderBy !== null && !this.hasReorderableColumn) {
+            const sortFunc = (first, second) => {
+              const key = this._config.orderBy.key;
+              const sorter = (f, s) => f[key] - s[key];
+              return this._config.orderBy.type === 'asc' ? sorter(first, second) : sorter(second, first);
+            };
+            (this._config.data as any[]).sort(sortFunc);
+          }
         }
       });
-    }
   }
 
   private setupData() {

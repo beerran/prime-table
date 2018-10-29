@@ -50,6 +50,10 @@ export class PrimeTableConfig {
     public responsive = true;
     public autoLayout = true;
     public rowsShown: number = null;
+    public orderBy: {
+        key: string,
+        type: 'asc' | 'desc'
+    } = null;
     public size: 'sm' | 'md' | 'lg' = 'md';
     public columnSettings = {
         resizable: false,
