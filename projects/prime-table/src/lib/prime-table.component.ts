@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, TemplateRef, ContentChild } from '@angular/core';
 import { SelectItem, TreeNode } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
 import { PrimeTableConfig } from './models/prime-table-config';
@@ -10,6 +10,9 @@ import { PrimeTableColumn } from './models/prime-table-column';
   styles: []
 })
 export class PrimeTableComponent implements OnInit {
+  @ContentChild(TemplateRef)
+  @Input() expandedTemplate: TemplateRef<any>;
+
   public _config = new PrimeTableConfig('standard');
   public dataLoaded = new BehaviorSubject<boolean>(false);
   public showFilters = false;

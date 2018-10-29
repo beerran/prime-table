@@ -5,7 +5,7 @@ import { PrimeTableContextMenu } from './prime-table-context-menu';
 
 export class PrimeTableConfig {
     constructor(
-        preset: 'easy' | 'standard' | 'drilldown' | 'format'
+        preset: 'none' | 'easy' | 'standard' | 'drilldown' | 'format' | 'expandable'
     ) {
         switch (preset) {
             case 'easy':
@@ -20,6 +20,12 @@ export class PrimeTableConfig {
                 this.drilldown = true;
                 this.scrollable = false;
             break;
+            case 'expandable':
+                this.addButton = true;
+                this.scrollable = true;
+                this.expandable = { key: 'id', enabled: true };
+                this.rowsShown = 10;
+                break;
             case 'format':
                 this.rowCount = false;
                 this.export = false;
@@ -27,11 +33,13 @@ export class PrimeTableConfig {
                 this.autoLayout = false;
             break;
             case 'standard':
-            default:
                 this.editButton = true;
                 this.addButton = true;
                 this.scrollable = true;
                 this.rowsShown = 10;
+            break;
+            case 'none':
+            default:
             break;
         }
     }
@@ -50,17 +58,25 @@ export class PrimeTableConfig {
     public responsive = true;
     public autoLayout = true;
     public rowsShown: number = null;
+    public size: 'sm' | 'md' | 'lg' = 'md';
+    public tooltip: string = null;
+    public drilldownProperty: string = null;
+
     public orderBy: {
         key: string,
         type: 'asc' | 'desc'
     } = null;
-    public size: 'sm' | 'md' | 'lg' = 'md';
+    public expandable: {
+        key: string,
+        enabled: boolean
+      } = {
+          key: null,
+          enabled: false
+    };
     public columnSettings = {
         resizable: false,
         selectable: false
     };
-    public tooltip: string = null;
-    public drilldownProperty: string = null;
     public menu: PrimeTableContextMenu = {
         enabled: false,
         node: null,

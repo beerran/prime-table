@@ -14,18 +14,22 @@ export class AppComponent implements OnInit {
 
   tableConfigReorderableRows = new PrimeTableConfig('standard');
   tableConfigSortableRows = new PrimeTableConfig('standard');
+  tableConfigExpandableRows = new PrimeTableConfig('expandable');
 
   ngOnInit() {
     this.tableConfigReorderableRows.archiveButton = true;
-    this.tableConfigReorderableRows.setColumns(this.getColumns(true));
-    this.tableConfigReorderableRows.setData(this.getData());
-
     this.tableConfigSortableRows.orderBy = {
       key: 'age',
       type: 'asc'
     };
+    this.tableConfigReorderableRows.setColumns(this.getColumns(true));
+    this.tableConfigReorderableRows.setData(this.getData());
+
     this.tableConfigSortableRows.setColumns(this.getColumns());
     this.tableConfigSortableRows.setData(this.getData());
+
+    this.tableConfigExpandableRows.setColumns(this.getColumns());
+    this.tableConfigExpandableRows.setData(this.getData());
   }
 
   onAdd = (event: any) => this.snotify.success('Callback to add item called! Item ID: ' + event.id, 'add() called');
