@@ -82,7 +82,7 @@ export class PrimeTableComponent implements OnInit {
           if (this._config.orderBy !== null && !this.hasReorderableColumn) {
             const sortFunc = (first, second) => {
               const key = this._config.orderBy.key;
-              const sorter = (f, s) => f[key] - s[key];
+              const sorter = (f, s) =>  f instanceof Number ? f[key] - s[key] : f[key] > s[key] ? 1 : -1;
               return this._config.orderBy.type === 'asc' ? sorter(first, second) : sorter(second, first);
             };
             (this._config.data as any[]).sort(sortFunc);
