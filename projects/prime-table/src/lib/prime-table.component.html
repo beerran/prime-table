@@ -68,7 +68,7 @@
 
     <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
         <tr [pContextMenuRow]="row" [pSelectableRow]="row" [pReorderableRow]="index" (onDrop)="rowReordered($event)">
-            <td *ngIf="_config.expandable" style="cursor:pointer">
+            <td *ngIf="_config.expandable.enabled" style="cursor:pointer">
                 <i class="fa" [pRowToggler]="row" [ngClass]="expanded ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
             </td>
             <td *ngIf="hasReorderableColumn">
@@ -98,7 +98,7 @@
             <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="archive.emit(row)">{{row.archived ? 'Restore' : 'Archive'}}</button></td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable">
+    <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">
         <tr>
             <td [attr.colspan]="columns.length + 1">
                 <ng-container *ngTemplateOutlet="expandedTemplate; context: { expandedRow: row }"></ng-container>

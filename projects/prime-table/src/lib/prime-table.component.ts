@@ -85,7 +85,10 @@ export class PrimeTableComponent implements OnInit {
           if (this._config.orderBy !== null && !this.hasReorderableColumn) {
             const sortFunc = (first, second) => {
               const key = this._config.orderBy.key;
-              const sorter = (f, s) =>  f instanceof Number ? f[key] - s[key] : f[key] > s[key] ? 1 : -1;
+              const sorter = (f, s) => f instanceof Number
+                ? (<number> this.resolveKey(key, f)) - (<number> this.resolveKey(key, s))
+                : this.resolveKey(key, f) > this.resolveKey(key, s)
+                  ? 1 : -1;
               return this._config.orderBy.type === 'asc' ? sorter(first, second) : sorter(second, first);
             };
             (this._config.data as any[]).sort(sortFunc);
@@ -138,7 +141,7 @@ export class PrimeTableComponent implements OnInit {
     return col.withLink.staticPath + dynamicPath;
   }
 
-  private resolveKey = (key: string, obj: any): string => {
+  private resolveKey = (key: string, obj: any): any => {
     return key.split('.').reduce((prev: any, curr: any) => prev ? prev[curr] : null , obj);
   }
 }

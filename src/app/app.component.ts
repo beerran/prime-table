@@ -19,14 +19,16 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.tableConfigReorderableRows.archiveButton = true;
     this.tableConfigSortableRows.orderBy = {
-      key: 'age',
+      key: 'child.value',
       type: 'asc'
     };
     this.tableConfigReorderableRows.setColumns(this.getColumns(true));
     this.tableConfigReorderableRows.setData(this.getData());
 
-    this.tableConfigSortableRows.setColumns(this.getColumns());
-    this.tableConfigSortableRows.setData(this.getData());
+    this.tableConfigSortableRows.setColumns([...this.getColumns(), new PrimeTableColumn('Child value', 'child.value')]);
+    const sortableData = this.getData();
+    sortableData.forEach(item => item.child = this.getChildData());
+    this.tableConfigSortableRows.setData(sortableData);
 
     this.tableConfigExpandableRows.setColumns(this.getColumns());
     this.tableConfigExpandableRows.setData(this.getData());
@@ -46,7 +48,7 @@ export class AppComponent implements OnInit {
     ];
   }
 
-  private getData = () => {
+  private getData = (): any[] => {
     return [
       {id: 2, order: 1, name: 'Emil Larsson', age: 24, email: 'emil.larsson@seb.se'},
       {id: 3, order: 2, name: 'Jan Lövgren', age: 46, email: 'jan.lovgren@seb.se'},
@@ -55,5 +57,9 @@ export class AppComponent implements OnInit {
       {id: 4, order: 3, name: 'Joel Forsgren', age: 34, email: 'joel.forsgren@seb.se'},
       {id: 5, order: 6, name: 'Unknown User', age: 0, email: 'name@example.com'}
     ];
+  }
+
+  private getChildData = () => {
+    return  { value: Math.random() * 15, id: 1};
   }
 }
