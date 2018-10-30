@@ -33,6 +33,8 @@ export class PrimeTableComponent implements OnInit {
 
   public screenHeight = '0px';
 
+  public cm: any; // Placeholder for contextmenu
+
   private columnsLoaded = new BehaviorSubject<boolean>(false);
 
   @Input('config')

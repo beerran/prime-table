@@ -33,7 +33,6 @@ table.ui-treetable-table {
 
 .ui-table table {
     @extend .table;
-    @extend .table-striped;
     @extend .table-hover;
     td {
         &.error-column {
@@ -57,10 +56,6 @@ table.ui-treetable-table {
             text-decoration: none;
         }
     }
-}
-
-.ui-table-dragpoint-bottom {
-    background: $info !important;
 }
 
 a.ui-treetable-toggler {
@@ -146,4 +141,81 @@ a.ui-treetable-toggler {
             border-bottom-right-radius: 4px;
         }
     }
+}
+
+// Expand styles
+.expandable-column-header {
+    width: 1rem;
+}
+
+.expandable-column {
+    background-color: $primary;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.expand-icon {
+    transition: transform .4s;
+    &.expanded {
+        transform: rotate(90deg);
+    }
+}
+
+.expanded-row td {
+    border-top: none !important;
+}
+
+// Striped styles
+.tr-even {
+    background-color: $white;
+}
+
+.tr-odd {
+    background-color: $light;
+}
+
+table tbody tr {
+    &:nth-of-type(even) {
+        @extend .tr-even;
+        +.expanded-row {
+            @extend .tr-even;
+        }
+    }
+    &:nth-of-type(odd) {
+        @extend .tr-odd;
+        +.expanded-row {
+            @extend .tr-odd;
+        }
+    }
+}
+
+// Reorder styles
+.reorderable-column-header {
+    width: 1rem;
+}
+
+.reorderable-column {
+    background-color: $primary;
+    color: #fff;
+    cursor: move;
+    text-align: center;
+    transition: background-color .4s;
+}
+
+.reorder-icon {
+    &.expanded {
+        transform: rotate(90deg);
+    }
+}
+
+table tbody tr[draggable=true] {
+    .reorderable-column {
+        background-color: #fff;
+        color: $primary;
+    }
+}
+
+.ui-table-dragpoint-bottom {
+    background: $info !important;
 }
