@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     this.tableConfigReorderableRows.archiveButton = true;
     this.tableConfigSortableRows.orderBy = {
       key: 'child.value',
-      type: 'asc'
+      type: 'desc'
     };
     this.tableConfigReorderableRows.setColumns(this.getColumns(true));
     this.tableConfigReorderableRows.setData(this.getData());

@@ -20,7 +20,7 @@
 
 <p-table [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" *ngIf="!_config.drilldown" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
     selectionMode="multiple" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data"
-    [columns]="selectedColumns" [dataKey]="_config.expandable.key">
+    [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
     <ng-template pTemplate="caption">
         <div class="row">
             <div class="col-6 col-md-2" *ngIf="_config.rowCount">
