@@ -147,8 +147,7 @@ a.ui-treetable-toggler {
 }
 
 .expandable-column {
-    background-color: $primary;
-    color: #fff;
+    color: $dark;
     cursor: pointer;
     text-align: center;
 }
@@ -194,8 +193,7 @@ table tbody tr {
 }
 
 .reorderable-column {
-    background-color: $primary;
-    color: #fff;
+    color: $dark;
     cursor: move;
     text-align: center;
     transition: background-color .4s;
@@ -209,8 +207,8 @@ table tbody tr {
 
 table tbody tr[draggable=true] {
     .reorderable-column {
-        background-color: #fff;
-        color: $primary;
+        background-color: $dark;
+        color: $white;
     }
 }
 
