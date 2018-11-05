@@ -32,7 +32,10 @@
                 <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
                 <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>
-                <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary ml-2 pull-right" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
+                <div class="btn-group ml-2 pull-right" role="group">
+                    <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-dark" type="button" (click)="selectedRows = []">{{_config.selectableRows.clearText}}</button>
+                    <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
+                </div>
                 <ng-content select=".table-extra-content"></ng-content>
             </div>
         </div>

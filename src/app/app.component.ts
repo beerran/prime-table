@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
     this.tableConfigSelectableRows.setColumns(this.getColumns());
     this.tableConfigSelectableRows.setData(this.getData());
-    this.tableConfigSelectableRows.selectableRows = {enabled: true, buttonText: 'Choose selected'};
+    this.tableConfigSelectableRows.selectableRows = {enabled: true, buttonText: 'Choose selected', clearText: 'X'};
   }
 
   onAdd = (event: any) => this.snotify.success('Callback to add item called! Item ID: ' + event.id, 'add() called');

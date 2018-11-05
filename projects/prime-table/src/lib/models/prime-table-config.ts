@@ -85,6 +85,7 @@ export class PrimeTableConfig {
 
     public selectableRows = {
         enabled: false,
+        clearText: 'X',
         buttonText: 'Use selected'
     };
 
