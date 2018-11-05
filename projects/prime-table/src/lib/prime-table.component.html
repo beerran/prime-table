@@ -18,8 +18,8 @@
 </p-treeTable>
 
 <p-table *ngIf="!_config.drilldown && _config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
-    selectionMode="multiple" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table selectable-rows-table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data"
-    [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
+    selectionMode="multiple" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table selectable-rows-table" [class.table-sm]="_config.size === 'sm'"
+    [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
     <ng-template pTemplate="caption">
         <div class="row">
             <div class="col-6 col-md-2" *ngIf="_config.rowCount">
@@ -75,7 +75,6 @@
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
             </td>
             <td *ngFor="let col of columns" [class.with-select]="col.hasSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
-                xx
                 <p-cellEditor *ngIf="col.editable; else onlyOutput">
                     <ng-template pTemplate="input">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="row[col.field]" />
@@ -110,8 +109,8 @@
 </p-table>
 
 <p-table *ngIf="!_config.drilldown && !_config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
-    [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data"
-    [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
+    [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key"
+    [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
     <ng-template pTemplate="caption">
         <div class="row">
             <div class="col-6 col-md-2" *ngIf="_config.rowCount">
@@ -123,7 +122,7 @@
             <div class="col-12 col-md-7" [class.col-md-10]="!_config.columnSettings.selectable" [class.col-md-12]="!_config.rowCount && !_config.columnSettings.selectable">
                 <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
-                <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>                
+                <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>
                 <ng-content select=".table-extra-content"></ng-content>
             </div>
         </div>
