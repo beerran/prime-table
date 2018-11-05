@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   tableConfigReorderableRows = new PrimeTableConfig('standard');
   tableConfigSortableRows = new PrimeTableConfig('standard');
   tableConfigExpandableRows = new PrimeTableConfig('expandable');
+  tableConfigSelectableRows = new PrimeTableConfig('standard');
 
   ngOnInit() {
     this.tableConfigReorderableRows.archiveButton = true;
@@ -32,11 +33,19 @@ export class AppComponent implements OnInit {
 
     this.tableConfigExpandableRows.setColumns(this.getColumns());
     this.tableConfigExpandableRows.setData(this.getData());
+
+    this.tableConfigSelectableRows.setColumns(this.getColumns());
+    this.tableConfigSelectableRows.setData(this.getData());
+    this.tableConfigSelectableRows.selectableRows = {enabled: true, buttonText: 'Choose selected'};
   }
 
   onAdd = (event: any) => this.snotify.success('Callback to add item called! Item ID: ' + event.id, 'add() called');
   onEdit = (event: any) => this.snotify.info('Callback to edit item called! Item ID: ' + event.id, 'edit() called');
   onArchive = (event: any) => this.snotify.warning('Callback to archive item called! Item ID: ' + event.id, 'archive() called');
+  onSelected = (event: {id: number}[]) => {
+    console.log(event);
+    this.snotify.info('Callback to selected called! Item IDs: ' + event.map(e => e.id).join(','), 'selected() called');
+  }
 
   private getColumns = (reorderable = false) => {
     return [

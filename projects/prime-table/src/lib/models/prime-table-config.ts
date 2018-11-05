@@ -83,6 +83,11 @@ export class PrimeTableConfig {
         items: []
     };
 
+    public selectableRows = {
+        enabled: false,
+        buttonText: 'Use selected'
+    };
+
     public setDrilldownProperty(propertyName: string) {
         this.drilldownProperty = propertyName;
     }

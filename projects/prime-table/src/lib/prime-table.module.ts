@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { TableModule } from 'primeng/table';
+import { TableModule, TableCheckbox, TableHeaderCheckbox } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { TreeTableModule } from 'primeng/treetable';
 
@@ -22,7 +22,9 @@ import { PrimeTableComponent } from './prime-table.component';
     TooltipModule,
     ContextMenuModule,
   ],
-  declarations: [PrimeTableComponent],
+  declarations: [
+    PrimeTableComponent
+  ],
   exports: [PrimeTableComponent]
 })
 export class PrimeTableModule { }

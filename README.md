@@ -77,6 +77,7 @@ Use the template selector `<prime-table></prime-table>` where you want to displa
 |add()|If addButton is set to true in your config object, an Add New-button will appear. When clicked, this event is emitted|
 |edit()|If editButton is set to true in your config object, each row in the table will receive an additional column with an edit button. When clicked, this event is emitted where $event is the clicked item in the data array|
 |archive()|If archiveButton is set to true in your config object, each row in the table will receive an additional column with an archive button. When clicked, this event is emitted where $event is the clicked item in the data array|
+|selected()|If selectableRows.enabled is set to true, each selected row will get inserted into an array and emitted when this event is called. Emitted via button in table header
 
 ### PrimeTableConfig object
 
@@ -169,6 +170,13 @@ Customize if columns should be resizable and selectable (no functionality introd
         items: []
     }
 Where node is the row (any | TreeNode) for which to show a list of items (MenuItem[] from primeng/api). When clicked, do an event based on node data. Examples will come
+
+##### SelectableRows
+    selectableRows: {
+        enabled: boolean,
+        buttonText: string
+    }
+Where buttonText is the text of the button in the top right corner of the table. The button will in turn emit the "selected" event, with the selected rows as event data.
 
 ### PrimeTableColumn object
 | Property | Usage (default) |

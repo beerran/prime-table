@@ -17,9 +17,8 @@
     </ng-template>
 </p-treeTable>
 
-
-<p-table [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" *ngIf="!_config.drilldown" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
-    selectionMode="multiple" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data"
+<p-table *ngIf="!_config.drilldown && _config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
+    selectionMode="multiple" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table selectable-rows-table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data"
     [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
     <ng-template pTemplate="caption">
         <div class="row">
@@ -33,6 +32,7 @@
                 <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
                 <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>
+                <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary ml-2 pull-right" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
                 <ng-content select=".table-extra-content"></ng-content>
             </div>
         </div>
@@ -67,7 +67,98 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
-        <tr [pContextMenuRow]="row" [pSelectableRow]="row" [pReorderableRow]="index" (onDrop)="rowReordered($event)">
+        <tr [pContextMenuRow]="row" [pSelectableRow]="row" [pSelectableRowIndex]="index" [pReorderableRow]="index" (onDrop)="rowReordered($event)">
+            <td *ngIf="_config.expandable.enabled" class="expandable-column" [pRowToggler]="row">
+                <i class="fa fa-chevron-right expand-icon" [class.expanded]="expanded"></i>
+            </td>
+            <td *ngIf="hasReorderableColumn" class="reorderable-column">
+                <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
+            </td>
+            <td *ngFor="let col of columns" [class.with-select]="col.hasSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
+                xx
+                <p-cellEditor *ngIf="col.editable; else onlyOutput">
+                    <ng-template pTemplate="input">
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="row[col.field]" />
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        <span>{{getCellValue(row, col)}}</span>
+                    </ng-template>
+                </p-cellEditor>
+                <ng-template #onlyOutput>
+                    <div *ngIf="col.hasSelect; else textInput">
+                        <p-dropdown class="w-auto mw-100" [options]="col.values" placeholder="Select" optionLabel="name" [filter]="true" filterBy="value.name" [(ngModel)]="row[col.name]">
+                        </p-dropdown>
+                    </div>
+                    <ng-template #textInput>
+                        <a *ngIf="col.withLink; else spanOnly" routerLink="/{{getLinkValue(row, col)}}">{{getCellValue(row, col)}}</a>
+                        <ng-template #spanOnly><span>{{getCellValue(row, col)}}</span></ng-template>
+                    </ng-template>
+                </ng-template>
+            </td>
+            <td *ngIf="_config.editButton"><button class="btn btn-xs btn-dark" (click)="edit.emit(row)">Edit</button></td>
+            <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="archive.emit(row)">{{row.archived ? 'Restore' : 'Archive'}}</button></td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">
+        <tr class="expanded-row">
+            <td [attr.colspan]="columns.length + 1">
+                <ng-container *ngTemplateOutlet="expandedTemplate; context: { expandedRow: row }"></ng-container>
+            </td>
+        </tr>
+        <tr></tr>
+    </ng-template>
+</p-table>
+
+<p-table *ngIf="!_config.drilldown && !_config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
+    [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data"
+    [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
+    <ng-template pTemplate="caption">
+        <div class="row">
+            <div class="col-6 col-md-2" *ngIf="_config.rowCount">
+                <p-dropdown class="pull-left" [options]="rowCount.options" [(ngModel)]="rowCount.selected"></p-dropdown>
+            </div>
+            <div class="col-6 col-md-3" *ngIf="_config.columnSettings.selectable" [class.col-md-5]="!_config.rowCount">
+                <p-multiSelect [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
+            </div>
+            <div class="col-12 col-md-7" [class.col-md-10]="!_config.columnSettings.selectable" [class.col-md-12]="!_config.rowCount && !_config.columnSettings.selectable">
+                <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
+                <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
+                <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>                
+                <ng-content select=".table-extra-content"></ng-content>
+            </div>
+        </div>
+        <div class="row" *ngIf="showFilters">
+            <div class="col">
+                <input type="text" style="width:auto" class="form-control form-control-sm d-inline" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')">
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr *ngIf="_config.sortable; else unsortableRow">
+            <th *ngIf="_config.expandable.enabled" class="expandable-column-header"></th>
+            <th *ngIf="hasReorderableColumn" class="reorderable-column-header"></th>
+            <th [pSortableColumn]="col.name" *ngFor="let col of columns" pResizableColumn>
+                {{col.displayName || col.name}}
+                <p-sortIcon [field]="col.name"></p-sortIcon>
+            </th>
+            <th *ngIf="_config.editButton">Edit</th>
+            <th *ngIf="_config.archiveButton">Archive</th>
+        </tr>
+        <ng-template #unsortableRow>
+            <tr>
+                <th *ngIf="_config.expandable.enabled" class="expandable-column-header"></th>
+                <th *ngIf="hasReorderableColumn" class="reorderable-column-header"></th>
+                <th *ngFor="let col of columns" pResizableColumn>
+                    {{col.displayName || col.name}}
+                </th>
+                <th *ngIf="_config.editButton">Edit</th>
+                <th *ngIf="_config.archiveButton">Archive</th>
+            </tr>
+        </ng-template>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
+        <tr [pContextMenuRow]="row" [pReorderableRow]="index" (onDrop)="rowReordered($event)">
             <td *ngIf="_config.expandable.enabled" class="expandable-column" [pRowToggler]="row">
                 <i class="fa fa-chevron-right expand-icon" [class.expanded]="expanded"></i>
             </td>

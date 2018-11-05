@@ -64,6 +64,7 @@ export class PrimeTableComponent implements OnInit {
   @Output() add = new EventEmitter<any>();
   @Output() edit = new EventEmitter<any>();
   @Output() archive = new EventEmitter<any>();
+  @Output() selected = new EventEmitter<any>();
 
   @HostListener('window:resize', ['$event'])
   onResize(event?) {
