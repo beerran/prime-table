@@ -8,7 +8,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-        <tr [ttContextMenuRow]="rowNode" tooltipPosition="top" [pTooltip]="_config.tooltip ? rowData[_config.tooltip] : null" [ngClass]="_config.rowClasses ? getClasses(row) : null">
+        <tr [ttContextMenuRow]="rowNode" tooltipPosition="top" [pTooltip]="_config.tooltip ? rowData[_config.tooltip] : null" [ngClass]="_config.rowClasses ? getClasses(rowData) : null">
             <td *ngFor="let col of columns; let i = index" [ngClass]="col.extraClass ? col.extraClass(rowData) : ''">
                 <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
                 <span>{{rowData[col.name]}}</span>

@@ -92,7 +92,7 @@ export class PrimeTableComponent implements OnInit {
     this.dataLoaded.next(true);
   }
 
-  private getClasses(row: any) {
+  getClasses(row: any) {
     const obj: {
       [key: string]: boolean
     } = {};
