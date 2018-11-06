@@ -35,7 +35,9 @@ export class AppComponent implements OnInit {
           value: 'larsson.emil@hotmail.com',
           text: 'Private Email'
         }
-      ]
+      ],
+      change: (event, row, col) =>
+        this.snotify.success(`Column value for row changed. Event value: ${JSON.stringify(event.value)}`, `${col.name} col`)
     };
     reorderableRowColumns = [...reorderableRowColumns, selectCol];
     this.tableConfigReorderableRows.setColumns(reorderableRowColumns);
