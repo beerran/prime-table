@@ -30,13 +30,13 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-12">
-                <h4>With selectable rows</h4>
-            </div>
-            <div class="col-12">
-                <b-prime-table [config]="tableConfigSelectableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)" (selected)="onSelected($event)"></b-prime-table>
-            </div>
+        <div class="col-12">
+            <h4>With selectable rows</h4>
         </div>
+        <div class="col-12">
+            <b-prime-table [config]="tableConfigSelectableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)" (selected)="onSelected($event)"></b-prime-table>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <h4>With sortable rows, data from child property</h4>
@@ -50,7 +50,9 @@
             <h4>With reorderable rows, editable columns</h4>
         </div>
         <div class="col-12">
-            <b-prime-table [config]="tableConfigReorderableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)"></b-prime-table>
+            <b-prime-table [config]="tableConfigReorderableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)">
+                <div class="table-extra-content pull-right d-inline ml-2"><button class="btn btn-primary btn-sm">Useless button</button></div>
+            </b-prime-table>
         </div>
     </div>
 </div>
