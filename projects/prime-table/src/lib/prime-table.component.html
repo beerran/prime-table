@@ -17,8 +17,11 @@
     </ng-template>
 </p-treeTable>
 
-<ng-template #extraContentTemplate>
-    <ng-content select=".table-extra-content"></ng-content>
+<ng-template #leftHeaderTemplate>
+    <ng-content select=".header-left"></ng-content>
+</ng-template>
+<ng-template #rightHeaderTemplate>
+    <ng-content select=".header-right"></ng-content>
 </ng-template>
 
 <p-table *ngIf="!_config.drilldown && _config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
@@ -33,6 +36,7 @@
                 <p-multiSelect [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
             </div>
             <div class="col-12 col-md-7" [class.col-md-10]="!_config.columnSettings.selectable" [class.col-md-12]="!_config.rowCount && !_config.columnSettings.selectable">
+                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
                 <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
                 <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>
@@ -40,7 +44,7 @@
                     <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-dark" type="button" (click)="selectedRows = []">{{_config.selectableRows.clearText}}</button>
                     <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
                 </div>
-                <ng-container *ngTemplateOutlet="extraContentTemplate"></ng-container>
+                <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
             </div>
         </div>
         <div class="row" *ngIf="showFilters">
@@ -132,10 +136,11 @@
                 <p-multiSelect [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
             </div>
             <div class="col-12 col-md-7" [class.col-md-10]="!_config.columnSettings.selectable" [class.col-md-12]="!_config.rowCount && !_config.columnSettings.selectable">
+                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
                 <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
                 <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>
-                <ng-container *ngTemplateOutlet="extraContentTemplate"></ng-container>
+                <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
             </div>
         </div>
         <div class="row" *ngIf="showFilters">
