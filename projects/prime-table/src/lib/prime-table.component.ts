@@ -92,6 +92,16 @@ export class PrimeTableComponent implements OnInit {
     this.dataLoaded.next(true);
   }
 
+  private getClasses(row: any) {
+    const obj: {
+      [key: string]: boolean
+    } = {};
+    Object.keys(this._config.rowClasses).forEach(key => {
+      obj[key] = this._config.rowClasses[key](row);
+    });
+    return obj;
+  }
+
   private setupColumns() {
     this.selectedColumns = this._config.columns.filter(col => col.visible !== false);
     this.hasReorderableColumn = this._config.columns.findIndex(col => col.reorderable === true) >= 0;

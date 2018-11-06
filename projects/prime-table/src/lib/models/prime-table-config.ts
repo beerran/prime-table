@@ -61,6 +61,9 @@ export class PrimeTableConfig {
     public size: 'sm' | 'md' | 'lg' = 'md';
     public tooltip: string = null;
     public drilldownProperty: string = null;
+    public rowClasses: {
+        [key: string]: (row) => boolean
+    };
 
     public orderBy: {
         key: string,

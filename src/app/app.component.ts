@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SnotifyService } from 'ng-snotify';
-import { PrimeTableColumn, PrimeTableConfig } from 'prime-table';
+import { PrimeTableConfig } from 'projects/prime-table/src/lib/models/prime-table-config';
+import { PrimeTableColumn } from 'projects/prime-table/src/lib/models/prime-table-column';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +42,11 @@ export class AppComponent implements OnInit {
     };
     reorderableRowColumns = [...reorderableRowColumns, selectCol];
     this.tableConfigReorderableRows.setColumns(reorderableRowColumns);
+    this.tableConfigExpandableRows.rowClasses = {
+      'bg-danger': (row: any) => row.id % 2 === 0,
+      'bg-info': (row: any) => row.id % 2 === 1
+    };
+    console.log(this.tableConfigExpandableRows);
     this.tableConfigReorderableRows.setData(this.getData());
 
     this.tableConfigSortableRows.setColumns([...this.getColumns(), new PrimeTableColumn('Child value', 'child.value')]);
