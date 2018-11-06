@@ -96,7 +96,8 @@
                 </p-cellEditor>
                 <ng-template #onlyOutput>
                     <div *ngIf="col.withSelect; else textInput">
-                        <p-dropdown class="w-auto mw-100" (onChange)="col.withSelect.change($event, row, col)" [options]="col.withSelect.values" placeholder="Select" [optionLabel]="col.withSelect.label" [filter]="true" filterBy="col.withSelect.label" [(ngModel)]="row[col.name]">
+                        <p-dropdown class="w-auto mw-100" (onChange)="col.withSelect.change($event, row, col)" [options]="col.withSelect.values" [placeholder]="col.withSelect.placeholder" [optionLabel]="col.withSelect.label" [filter]="true" [filterBy]="col.withSelect.label"
+                            [(ngModel)]="row[col.name]">
                         </p-dropdown>
                     </div>
                     <ng-template #textInput>
