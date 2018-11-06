@@ -18,48 +18,46 @@ import { SortableComponent } from './sortable/sortable.component';
 // Packaged
 // import { PrimeTableModule } from 'prime-table';
 
+const routes: Route[] = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
+  {path: 'expanded', component: ExpandedComponent},
+  {path: 'selectable', component: SelectableComponent},
+  {path: 'sortable', component: SortableComponent},
+  {path: 'reorderable', component: ReorderableComponent},
+  {path: 'editable', component: EditableComponent},
+  {path: 'rowclass', component: RowclassComponent}
+];
 export const ROUTES = [
   {
-    route: {path: '', redirectTo: 'home', pathMatch: 'full'},
-    showInMenu: false
+    route: {path: 'home'},
+    label: 'Home'
   },
   {
-    route: {path: 'home', component: HomeComponent},
-    label: 'Home',
-    showInMenu: true
+    route: {path: 'expanded'},
+    label: 'Expanded rows'
   },
   {
-    route: {path: 'expanded', component: ExpandedComponent},
-    label: 'Expanded rows',
-    showInMenu: true
+    route: {path: 'selectable'},
+    label: 'Selectable rows'
   },
   {
-    route: {path: 'selectable', component: SelectableComponent},
-    label: 'Selectable rows',
-    showInMenu: true
+    route: {path: 'sortable'},
+    label: 'Sortable columns'
   },
   {
-    route: {path: 'sortable', component: SortableComponent},
-    label: 'Sortable columns',
-    showInMenu: true
+    route: {path: 'reorderable'},
+    label: 'Reorderable rows'
   },
   {
-    route: {path: 'reorderable', component: ReorderableComponent},
-    label: 'Reorderable rows',
-    showInMenu: true
+    route: {path: 'editable'},
+    label: 'Editable columns'
   },
   {
-    route: {path: 'editable', component: EditableComponent},
-    label: 'Editable columns',
-    showInMenu: true
-  },
-  {
-    route: {path: 'rowclass', component: RowclassComponent},
-    label: 'Custom column/row classes',
-    showInMenu: true
+    route: {path: 'rowclass'},
+    label: 'Custom column/row classes'
   }
 ];
-
 
 @NgModule({
   imports: [
@@ -67,7 +65,7 @@ export const ROUTES = [
     BrowserAnimationsModule,
     SnotifyModule,
     PrimeTableModule,
-    RouterModule.forRoot(ROUTES.map(route => route.route))
+    RouterModule.forRoot(routes)
   ],
   declarations: [
     AppComponent,
