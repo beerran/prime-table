@@ -1,8 +1,6 @@
-import { PrimeTableConfig } from './../../projects/prime-table/src/lib/models/prime-table-config';
 import { Component, OnInit } from '@angular/core';
-import { PrimeTableColumn } from 'prime-table';
 import { SnotifyService } from 'ng-snotify';
-
+import { PrimeTableColumn, PrimeTableConfig } from 'prime-table';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +21,24 @@ export class AppComponent implements OnInit {
       key: 'child.value',
       type: 'desc'
     };
-    this.tableConfigReorderableRows.setColumns(this.getColumns(true));
+    let reorderableRowColumns = this.getColumns(true);
+    reorderableRowColumns = reorderableRowColumns.slice(0, reorderableRowColumns.length - 1);
+    const selectCol = new PrimeTableColumn('E-mail', 'email', false, false, true, null, null);
+    selectCol.withSelect = {
+      label: 'text',
+      values: [
+        {
+          value: 'emil.larsson@seb.se',
+          text: 'Professional Email'
+        },
+        {
+          value: 'larsson.emil@hotmail.com',
+          text: 'Private Email'
+        }
+      ]
+    };
+    reorderableRowColumns = [...reorderableRowColumns, selectCol];
+    this.tableConfigReorderableRows.setColumns(reorderableRowColumns);
     this.tableConfigReorderableRows.setData(this.getData());
 
     this.tableConfigSortableRows.setColumns([...this.getColumns(), new PrimeTableColumn('Child value', 'child.value')]);
@@ -49,11 +64,11 @@ export class AppComponent implements OnInit {
 
   private getColumns = (reorderable = false) => {
     return [
-      new PrimeTableColumn('Order', 'order', false, reorderable),
-      new PrimeTableColumn('Id', 'id'),
-      new PrimeTableColumn('Name', 'name', reorderable),
-      new PrimeTableColumn('Age', 'age', reorderable),
-      new PrimeTableColumn('E-mail', 'email', reorderable)
+      new PrimeTableColumn<any>('Order', 'order', false, reorderable),
+      new PrimeTableColumn<any>('Id', 'id'),
+      new PrimeTableColumn<any>('Name', 'name', reorderable),
+      new PrimeTableColumn<any>('Age', 'age', reorderable),
+      new PrimeTableColumn<any>('E-mail', 'email', reorderable)
     ];
   }
 

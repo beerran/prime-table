@@ -77,7 +77,7 @@
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
             </td>
-            <td *ngFor="let col of columns" [class.with-select]="col.hasSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
+            <td *ngFor="let col of columns" [class.with-select]="col.withSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
                 <p-cellEditor *ngIf="col.editable; else onlyOutput">
                     <ng-template pTemplate="input">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="row[col.field]" />
@@ -87,8 +87,8 @@
                     </ng-template>
                 </p-cellEditor>
                 <ng-template #onlyOutput>
-                    <div *ngIf="col.hasSelect; else textInput">
-                        <p-dropdown class="w-auto mw-100" [options]="col.values" placeholder="Select" optionLabel="name" [filter]="true" filterBy="value.name" [(ngModel)]="row[col.name]">
+                    <div *ngIf="col.withSelect; else textInput">
+                        <p-dropdown class="w-auto mw-100" [options]="col.withSelect.values" placeholder="Select" [optionLabel]="col.withSelect.label" [filter]="true" filterBy="col.withSelect.label" [(ngModel)]="row[col.name]">
                         </p-dropdown>
                     </div>
                     <ng-template #textInput>
@@ -167,7 +167,7 @@
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
             </td>
-            <td *ngFor="let col of columns" [class.with-select]="col.hasSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
+            <td *ngFor="let col of columns" [class.with-select]="col.withSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
                 <p-cellEditor *ngIf="col.editable; else onlyOutput">
                     <ng-template pTemplate="input">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="row[col.field]" />
@@ -177,8 +177,8 @@
                     </ng-template>
                 </p-cellEditor>
                 <ng-template #onlyOutput>
-                    <div *ngIf="col.hasSelect; else textInput">
-                        <p-dropdown class="w-auto mw-100" [options]="col.values" placeholder="Select" optionLabel="name" [filter]="true" filterBy="value.name" [(ngModel)]="row[col.name]">
+                    <div *ngIf="col.withSelect; else textInput">
+                        <p-dropdown class="w-auto mw-100" [options]="col.withSelect.values" placeholder="Select" [optionLabel]="col.withSelect.label" [filter]="true" filterBy="col.withSelect.label" [(ngModel)]="row[col.name]">
                         </p-dropdown>
                     </div>
                     <ng-template #textInput>

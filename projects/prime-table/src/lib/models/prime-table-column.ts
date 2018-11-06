@@ -1,4 +1,5 @@
 import { PrimeTableColumnLink } from './prime-table-column-link';
+import { PrimeTableSelect } from './prime-table-select';
 
 export class PrimeTableColumn<T> {
     constructor(
@@ -9,9 +10,8 @@ export class PrimeTableColumn<T> {
         public visible = true,
         public render?: (row: T) => any,
         public extraClass?: (row: T) => string,
-        public values?: any[]
+        public withSelect: PrimeTableSelect = null
     ) { }
-    hasSelect ? = false;
     [key: string]: any;
     withLink: PrimeTableColumnLink = null;
 }
