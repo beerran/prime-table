@@ -1,0 +1,20 @@
+<p>{{infoText}}</p>
+
+<b-prime-table [config]="tableConfig" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)">
+    <ng-template let-expanded="expandedRow">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="list-group">
+                        <div class="list-group-item"><strong>Name:</strong> {{expanded.name}}</div>
+                        <div class="list-group-item"><strong>Age:</strong> {{expanded.age}}</div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="list-group-item"><strong>E-mail:</strong> {{expanded.email}}</div>
+                    <div class="list-group-item"><strong>Order + id sum:</strong> {{expanded.order + expanded.id}}</div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</b-prime-table>

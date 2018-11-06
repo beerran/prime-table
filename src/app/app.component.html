@@ -1,58 +1,27 @@
+<div class="jumbotron jumbotron-fluid bg-dark text-white">
+    <div class="container">
+        <h1 class="display-4"><span class="text-danger">Prime</span>Table</h1>
+        <p class="lead">Table wrapper using the <a class="text-dange" href="https://www.primefaces.org/primeng/#/" target="_new">PrimeNg</a> component package</p>
+        <div class="btn-group" role="group" aria-label="External links">
+            <a class="btn btn-light btn-md" href="https://github.com/beerran/prime-table" target="_new" role="button">GitHub</a>
+            <a class="btn btn-danger btn-md" href="https://npmjs.com/package/prime-table" target="_new" role="button">npmjs</a>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row my-4">
-        <div class="col-12">
-            <h1>Prime Table</h1>
+        <div class="col-12 col-md-10">
+            <router-outlet></router-outlet>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h4>With expandable rows</h4>
-        </div>
-        <div class="col-12">
-            <b-prime-table [config]="tableConfigExpandableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)">
-                <ng-template let-expanded="expandedRow">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="list-group">
-                                    <div class="list-group-item"><strong>Name:</strong> {{expanded.name}}</div>
-                                    <div class="list-group-item"><strong>Age:</strong> {{expanded.age}}</div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="list-group-item"><strong>E-mail:</strong> {{expanded.email}}</div>
-                                <div class="list-group-item"><strong>Order + id sum:</strong> {{expanded.order + expanded.id}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </b-prime-table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h4>With selectable rows</h4>
-        </div>
-        <div class="col-12">
-            <b-prime-table [config]="tableConfigSelectableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)" (selected)="onSelected($event)"></b-prime-table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h4>With sortable rows, data from child property</h4>
-        </div>
-        <div class="col-12">
-            <b-prime-table [config]="tableConfigSortableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)"></b-prime-table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h4>With reorderable rows, editable columns</h4>
-        </div>
-        <div class="col-12">
-            <b-prime-table [config]="tableConfigReorderableRows" (add)="onAdd($event)" (edit)="onEdit($event)" (archive)="onArchive($event)">
-                <div class="right-header pull-right d-inline ml-2"><button class="btn btn-primary btn-sm">Useless button</button></div>
-            </b-prime-table>
+        <div class="col-12 col-md-2">
+            <nav class="nav flex-column">
+
+            </nav>
+            <div class="nav flex-column nav-pills" aria-orientation="vertical">
+                <a class="nav-link" *ngFor="let item of menu" routerLinkActive="active" [routerLink]="item.route.path">
+                    {{item.label}}
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,25 @@
+import { SnotifyService } from 'ng-snotify';
+import { Component, OnInit } from '@angular/core';
+import { SharedStuff } from '../shared';
+import { PrimeTableConfig } from 'prime-table';
+import { BaseComponent } from '../base.component';
+
+@Component({
+  selector: 'app-expanded',
+  templateUrl: './expanded.component.html',
+  styleUrls: ['./expanded.component.css']
+})
+export class ExpandedComponent extends BaseComponent implements OnInit {
+  tableConfig = new PrimeTableConfig('expandable');
+  infoText = 'Expand rows easily with your own content using ng-template';
+  constructor(protected snotify: SnotifyService) {
+    super(snotify);
+  }
+
+  ngOnInit() {
+    this.tableConfig.sortable = false;
+    this.tableConfig.editButton = false;
+    this.tableConfig.setColumns(SharedStuff.GetColumns());
+    this.tableConfig.setData(SharedStuff.GetData());
+  }
+}
