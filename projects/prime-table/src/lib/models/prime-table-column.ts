@@ -10,6 +10,7 @@ export class PrimeTableColumn<T> {
         public visible = true,
         public render?: (row: T) => any,
         public extraClass?: (row: T) => string,
+        public defaultValue = '-',
         public withSelect: PrimeTableSelect = null
     ) { }
     [key: string]: any;

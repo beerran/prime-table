@@ -92,7 +92,12 @@
                         </p-dropdown>
                     </div>
                     <ng-template #textInput>
-                        <a *ngIf="col.withLink; else spanOnly" routerLink="/{{getLinkValue(row, col)}}">{{getCellValue(row, col)}}</a>
+                        <div *ngIf="col.withLink; else spanOnly">
+                            <button *ngIf="col.withLink.methodCall" class="btn btn-xs btn-link" (click)="col.withLink.methodCall(row, col)">
+                                {{getCellValue(row, col)}}
+                            </button>
+                            <a *ngIf="!col.withLink.methodCall" routerLink="/{{getLinkValue(row, col)}}">{{getCellValue(row, col)}}</a>
+                        </div>
                         <ng-template #spanOnly><span>{{getCellValue(row, col)}}</span></ng-template>
                     </ng-template>
                 </ng-template>
@@ -182,7 +187,12 @@
                         </p-dropdown>
                     </div>
                     <ng-template #textInput>
-                        <a *ngIf="col.withLink; else spanOnly" routerLink="/{{getLinkValue(row, col)}}">{{getCellValue(row, col)}}</a>
+                        <div *ngIf="col.withLink; else spanOnly">
+                            <button *ngIf="col.withLink.methodCall" class="btn btn-xs btn-link" (click)="col.withLink.methodCall(row, col)">
+                                {{getCellValue(row, col)}}
+                            </button>
+                            <a *ngIf="!col.withLink.methodCall" routerLink="/{{getLinkValue(row, col)}}">{{getCellValue(row, col)}}</a>
+                        </div>
                         <ng-template #spanOnly><span>{{getCellValue(row, col)}}</span></ng-template>
                     </ng-template>
                 </ng-template>

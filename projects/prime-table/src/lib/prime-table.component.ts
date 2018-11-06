@@ -123,7 +123,15 @@ export class PrimeTableComponent implements OnInit {
     if (col.render) {
       return col.render(row);
     } else {
-      return this.resolveKey(col.name, row);
+      try {
+        const resolvedValue = this.resolveKey(col.name, row);
+        if (resolvedValue === null || resolvedValue === undefined || resolvedValue === '') {
+          return col.defaultValue || '-';
+        }
+        return resolvedValue;
+      } catch {
+        return col.defaultValue || '-';
+      }
     }
   }
 
