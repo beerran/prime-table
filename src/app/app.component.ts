@@ -11,7 +11,6 @@ import { ROUTES } from './app.module';
 export class AppComponent implements OnInit {
   constructor(private snotify: SnotifyService) { }
   menu = ROUTES;
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

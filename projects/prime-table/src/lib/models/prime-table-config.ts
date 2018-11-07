@@ -23,7 +23,7 @@ export class PrimeTableConfig {
             case 'expandable':
                 this.addButton = true;
                 this.scrollable = true;
-                this.expandable = { key: 'id', enabled: true };
+                this.expandable = { key: 'id', enabled: true, icon: 'fa-chevron-right' };
                 this.rowsShown = 10;
                 break;
             case 'format':
@@ -71,10 +71,12 @@ export class PrimeTableConfig {
     } = null;
     public expandable: {
         key: string,
-        enabled: boolean
+        enabled: boolean,
+        icon: string
       } = {
           key: null,
-          enabled: false
+          enabled: false,
+          icon: 'fa-chevron-right'
     };
     public columnSettings = {
         resizable: false,

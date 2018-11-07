@@ -80,7 +80,7 @@
     <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
         <tr [pContextMenuRow]="row" [pSelectableRow]="row" [pSelectableRowIndex]="index" [pReorderableRow]="index" (onDrop)="rowReordered($event)" [ngClass]="_config.rowClasses ? getClasses(row) : null">
             <td *ngIf="_config.expandable.enabled" class="expandable-column" [pRowToggler]="row">
-                <i class="fa fa-chevron-right expand-icon" [class.expanded]="expanded"></i>
+                <i class="fa {{_config.expandable.icon}} expand-icon" [class.expanded]="expanded"></i>
             </td>
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
@@ -96,7 +96,7 @@
                 </p-cellEditor>
                 <ng-template #onlyOutput>
                     <div *ngIf="col.withSelect; else textInput">
-                            <p-dropdown class="w-auto mw-100" (onChange)="col.withSelect.change($event, row, col)" [options]="col.withSelect.values" placeholder="Select" [optionLabel]="col.withSelect.label" filter="true" filterBy="value.{{col.withSelect.label}}" [(ngModel)]="row[col.name]">
+                        <p-dropdown class="w-auto mw-100" (onChange)="col.withSelect.change($event, row, col)" [options]="col.withSelect.values" placeholder="Select" [optionLabel]="col.withSelect.label" filter="true" filterBy="value.{{col.withSelect.label}}" [(ngModel)]="row[col.name]">
                         </p-dropdown>
                     </div>
                     <ng-template #textInput>
@@ -176,7 +176,7 @@
     <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
         <tr [pContextMenuRow]="row" [pReorderableRow]="index" (onDrop)="rowReordered($event)" [ngClass]="_config.rowClasses ? getClasses(row) : null">
             <td *ngIf="_config.expandable.enabled" class="expandable-column" [pRowToggler]="row">
-                <i class="fa fa-chevron-right expand-icon" [class.expanded]="expanded"></i>
+                <i class="fa {{_config.expandable.icon}} expand-icon" [class.expanded]="expanded"></i>
             </td>
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
