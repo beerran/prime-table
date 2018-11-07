@@ -80,7 +80,7 @@
     <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
         <tr [pContextMenuRow]="row" [pSelectableRow]="row" [pSelectableRowIndex]="index" [pReorderableRow]="index" (onDrop)="rowReordered($event)" [ngClass]="_config.rowClasses ? getClasses(row) : null">
             <td *ngIf="_config.expandable.enabled" class="expandable-column" [pRowToggler]="row">
-                <i class="fa {{_config.expandable.icon}} expand-icon" [class.expanded]="expanded"></i>
+                <i class="expand-icon fa {{!expanded ? _config.expandable.icon.collapsed : _config.expandable.icon.append ? _config.expandable.icon.collapsed + ' ' + _config.expandable.icon.expanded : _config.expandable.icon.expanded}}"></i>
             </td>
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
@@ -176,7 +176,7 @@
     <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
         <tr [pContextMenuRow]="row" [pReorderableRow]="index" (onDrop)="rowReordered($event)" [ngClass]="_config.rowClasses ? getClasses(row) : null">
             <td *ngIf="_config.expandable.enabled" class="expandable-column" [pRowToggler]="row">
-                <i class="fa {{_config.expandable.icon}} expand-icon" [class.expanded]="expanded"></i>
+                <i class="expand-icon fa {{!expanded ? _config.expandable.icon.collapsed : _config.expandable.icon.append ? _config.expandable.icon.collapsed + ' ' + _config.expandable.icon.expanded : _config.expandable.icon.expanded}}"></i>
             </td>
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
