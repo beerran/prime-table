@@ -8,7 +8,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-        <tr [ttContextMenuRow]="rowNode" tooltipPosition="top" [pTooltip]="_config.tooltip ? rowData[_config.tooltip] : null" [ngClass]="_config.rowClasses ? getClasses(rowData) : null">
+        <tr [ttContextMenuRow]="rowNode" tooltipPosition="top" [pTooltip]="_config.tooltip ? getCellValue(rowData, _config.tooltip) : null" [ngClass]="_config.rowClasses ? getClasses(rowData) : null">
             <td *ngFor="let col of columns; let i = index" [ngClass]="col.extraClass ? col.extraClass(rowData) : ''">
                 <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
                 <span>{{rowData[col.name]}}</span>
@@ -78,7 +78,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-row let-columns="columns" let-index="rowIndex" let-expanded="expanded">
-        <tr [pContextMenuRow]="row" [pSelectableRow]="row" [pSelectableRowIndex]="index" [pReorderableRow]="index" (onDrop)="rowReordered($event)" [ngClass]="_config.rowClasses ? getClasses(row) : null">
+        <tr tooltipPosition="top" [pTooltip]="_config.tooltip ? getCellValue(row, _config.tooltip) : null" [pContextMenuRow]="row" [pSelectableRow]="row" [pSelectableRowIndex]="index" [pReorderableRow]="index" (onDrop)="rowReordered($event)" [ngClass]="_config.rowClasses ? getClasses(row) : null">
             <td *ngIf="_config.expandable.enabled" class="expandable-column" [pRowToggler]="row">
                 <i class="expand-icon fa {{!expanded ? _config.expandable.icon.collapsed : _config.expandable.icon.append ? _config.expandable.icon.collapsed + ' ' + _config.expandable.icon.expanded : _config.expandable.icon.expanded}}"></i>
             </td>
