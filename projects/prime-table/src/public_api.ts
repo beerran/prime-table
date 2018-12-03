@@ -9,3 +9,4 @@ export * from './lib/models/prime-table-column';
 export * from './lib/models/prime-table-column-link';
 export * from './lib/models/prime-table-config';
 export * from './lib/models/prime-table-context-menu';
+export * from './lib/models/prime-table-select';
