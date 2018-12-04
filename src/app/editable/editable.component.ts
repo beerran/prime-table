@@ -41,27 +41,13 @@ export class EditableComponent extends BaseComponent implements OnInit {
     this.tableConfig.archiveButton = true;
     this.tableConfig.setColumns(cols);
     this.tableConfig.setData(SharedStuff.GetData());
-    this.tableConfig.onArchive = (item) => this.test(item);
+    this.tableConfig.onArchive = (item) => SharedStuff.onArchive(item, this.snotify);
     this.tableConfig.onCellEdit = (item, field) => {
       this.snotify.info(`Field "${field}" changed to "${item[field]}" for item with id ${item.id}`, 'Edit called');
     };
     this.service.getData().subscribe(data => {
       this.selectData = data;
       this.selectCol.withSelect.values = this.selectData;
-    });
-  }
-
-  test(item: any): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-        of(['a', 'b', 'c', 'd', 'e']).
-        pipe(
-          debounceTime(5000),
-          switchMap(() => ['asd'])
-        ).subscribe(data => {
-        console.log(data);
-        SharedStuff.onArchive(item, this.snotify);
-        resolve(true);
-      });
     });
   }
 }

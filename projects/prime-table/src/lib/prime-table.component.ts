@@ -99,7 +99,6 @@ export class PrimeTableComponent implements OnInit {
   }
 
   doArchive(row: any) {
-    row.isArchiving = true;
     if (this._config.onArchive) {
       this._config.onArchive(row);
     }

@@ -18,7 +18,7 @@ export class RowclassComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tableConfig.onArchive = (item) => new Promise((resolve, reject) => {SharedStuff.onArchive(item, this.snotify); resolve(true); });
+    this.tableConfig.onArchive = (item) => SharedStuff.onArchive(item, this.snotify);
     this.tableConfig.sortable = false;
     const cols = SharedStuff.GetColumns();
     cols.forEach(col => {
