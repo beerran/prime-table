@@ -85,7 +85,7 @@
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
             </td>
-            <td *ngFor="let col of columns" [class.with-select]="col.withSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
+            <td *ngFor="let col of columns" [class.with-select]="col.withSelect" [pEditableColumn]="{row: row, index: index}" [pEditableColumnField]="col.field" class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
                 <p-cellEditor *ngIf="col.editable; else onlyOutput">
                     <ng-template pTemplate="input">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="row[col.field]" />
@@ -111,7 +111,7 @@
                 </ng-template>
             </td>
             <td *ngIf="_config.editButton"><button class="btn btn-xs btn-dark" (click)="edit.emit(row)">Edit</button></td>
-            <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="archive.emit(row)">{{row.archived ? 'Restore' : 'Archive'}}</button></td>
+            <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row.archived ? 'Restore' : 'Archive'}}</ng-template></button></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">
@@ -126,7 +126,7 @@
 
 <p-table *ngIf="!_config.drilldown && !_config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
     [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key"
-    [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
+    [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null" (onEditComplete)="doSave($event)">
     <ng-template pTemplate="caption">
         <div class="row">
             <div class="col-6 col-md-2" *ngIf="_config.rowCount">
@@ -181,7 +181,7 @@
             <td *ngIf="hasReorderableColumn" class="reorderable-column">
                 <i class="fa fa-bars reorder-icon" pReorderableRowHandle></i>
             </td>
-            <td *ngFor="let col of columns" [class.with-select]="col.withSelect" pEditableColumn class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
+            <td *ngFor="let col of columns" [class.with-select]="col.withSelect" [pEditableColumn]="{row: row, index: index}" [pEditableColumnField]="col.field" class="ui-resizable-column" [ngClass]="col.extraClass ? col.extraClass(row) : ''">
                 <p-cellEditor *ngIf="col.editable; else onlyOutput">
                     <ng-template pTemplate="input">
                         <input type="text" class="form-control form-control-sm" [(ngModel)]="row[col.field]" />
@@ -207,7 +207,7 @@
                 </ng-template>
             </td>
             <td *ngIf="_config.editButton"><button class="btn btn-xs btn-dark" (click)="edit.emit(row)">Edit</button></td>
-            <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="archive.emit(row)">{{row.archived ? 'Restore' : 'Archive'}}</button></td>
+            <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row.archived ? 'Restore' : 'Archive'}}</ng-template></button></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">

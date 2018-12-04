@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
-import { PrimeTableConfig, PrimeTableColumn } from 'prime-table';
 import { SnotifyService } from 'ng-snotify';
 import { SharedStuff } from '../shared';
-
+import { Service } from '../app.service';
+import { PrimeTableConfig, PrimeTableColumn } from 'prime-table';
 @Component({
   selector: 'app-editable',
   templateUrl: './editable.component.html',
@@ -12,24 +12,17 @@ import { SharedStuff } from '../shared';
 export class EditableComponent extends BaseComponent implements OnInit {
   tableConfig = new PrimeTableConfig('standard');
   infoText = 'Allow inline editing for all rows on the fly';
-  constructor(protected snotify: SnotifyService) {
+  selectData: {value: string, text: string}[] = [];
+  selectCol = new PrimeTableColumn('E-mail', 'email', false, false, true, null, null);
+
+  constructor(protected snotify: SnotifyService, private service: Service) {
     super(snotify);
   }
 
   ngOnInit() {
-    const selectCol = new PrimeTableColumn('E-mail', 'email', false, false, true, null, null);
-    selectCol.withSelect = {
+    this.selectCol.withSelect = {
       label: 'text',
-      values: [
-        {
-          value: 'professional@email.com',
-          text: 'Professional Email'
-        },
-        {
-          value: 'private@email.com',
-          text: 'Private Email'
-        }
-      ],
+      values: [],
       placeholder: 'Select',
       change: (event, row, col) =>
         this.snotify.success(`Column value for row changed. Event value: ${JSON.stringify(event.value)}`, `${col.name} col`)
@@ -41,10 +34,21 @@ export class EditableComponent extends BaseComponent implements OnInit {
       return col;
     });
     cols = cols.slice(0, cols.length - 1);
-    cols = [...cols, selectCol];
+    cols = [...cols, this.selectCol];
     this.tableConfig.sortable = false;
     this.tableConfig.archiveButton = true;
     this.tableConfig.setColumns(cols);
     this.tableConfig.setData(SharedStuff.GetData());
+    this.tableConfig.onArchive = (item) => new Promise((resolve, reject) => {
+      SharedStuff.onArchive(item, this.snotify);
+      resolve(true);
+    });
+    this.tableConfig.onCellEdit = (item, field) => {
+      this.snotify.info(`Field "${field}" changed to "${item[field]}" for item with id ${item.id}`, 'Edit called');
+    };
+    this.service.getData().subscribe(data => {
+      this.selectData = data;
+      this.selectCol.withSelect.values = this.selectData;
+    });
   }
 }

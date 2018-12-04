@@ -1,8 +1,19 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, TemplateRef, ContentChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { SelectItem, TreeNode } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
-import { PrimeTableConfig } from './models/prime-table-config';
+
 import { PrimeTableColumn } from './models/prime-table-column';
+import { PrimeTableConfig } from './models/prime-table-config';
 
 @Component({
   selector: 'b-prime-table',
@@ -63,7 +74,6 @@ export class PrimeTableComponent implements OnInit {
 
   @Output() add = new EventEmitter<any>();
   @Output() edit = new EventEmitter<any>();
-  @Output() archive = new EventEmitter<any>();
   @Output() selected = new EventEmitter<any>();
 
   @HostListener('window:resize', ['$event'])
@@ -86,6 +96,19 @@ export class PrimeTableComponent implements OnInit {
           }
         }
       });
+  }
+
+  doArchive(row: any) {
+    row.isArchiving = true;
+    if (this._config.onArchive) {
+      this._config.onArchive(row).then(() => row.isArchiving = false);
+    }
+  }
+
+  doSave(event: any) {
+    if (this._config.onCellEdit) {
+      this._config.onCellEdit(event.data.row, event.field);
+    }
   }
 
   private setupData() {
