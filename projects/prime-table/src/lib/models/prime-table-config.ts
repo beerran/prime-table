@@ -69,7 +69,7 @@ export class PrimeTableConfig {
     public size: 'sm' | 'md' | 'lg' = 'md';
     public tooltip: string = null;
     public drilldownProperty: string = null;
-    public onArchive: (item: any) => Promise<boolean> = null;
+    public onArchive: (item: any) => void = null;
     public onCellEdit: (item: any, editedField: string) => void = null;
     public rowClasses: {
         [key: string]: (row) => boolean

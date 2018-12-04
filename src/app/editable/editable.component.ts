@@ -4,6 +4,8 @@ import { SnotifyService } from 'ng-snotify';
 import { SharedStuff } from '../shared';
 import { Service } from '../app.service';
 import { PrimeTableConfig, PrimeTableColumn } from 'prime-table';
+import { of } from 'rxjs';
+import { switchMap, debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-editable',
   templateUrl: './editable.component.html',
@@ -39,16 +41,27 @@ export class EditableComponent extends BaseComponent implements OnInit {
     this.tableConfig.archiveButton = true;
     this.tableConfig.setColumns(cols);
     this.tableConfig.setData(SharedStuff.GetData());
-    this.tableConfig.onArchive = (item) => new Promise((resolve, reject) => {
-      SharedStuff.onArchive(item, this.snotify);
-      resolve(true);
-    });
+    this.tableConfig.onArchive = (item) => this.test(item);
     this.tableConfig.onCellEdit = (item, field) => {
       this.snotify.info(`Field "${field}" changed to "${item[field]}" for item with id ${item.id}`, 'Edit called');
     };
     this.service.getData().subscribe(data => {
       this.selectData = data;
       this.selectCol.withSelect.values = this.selectData;
+    });
+  }
+
+  test(item: any): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+        of(['a', 'b', 'c', 'd', 'e']).
+        pipe(
+          debounceTime(5000),
+          switchMap(() => ['asd'])
+        ).subscribe(data => {
+        console.log(data);
+        SharedStuff.onArchive(item, this.snotify);
+        resolve(true);
+      });
     });
   }
 }
