@@ -17,6 +17,7 @@ export class SortableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tableConfig.onArchive = (item) => new Promise((resolve, reject) => {SharedStuff.onArchive(item, this.snotify); resolve(true); });
     this.tableConfig.orderBy = {
       key: 'child.value',
       type: 'desc'

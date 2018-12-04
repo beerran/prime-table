@@ -17,6 +17,7 @@ export class ReorderableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tableConfig.onArchive = (item) => new Promise((resolve, reject) => {SharedStuff.onArchive(item, this.snotify); resolve(true); });
     this.tableConfig.sortable = false;
     this.tableConfig.editButton = false;
     const cols = SharedStuff.GetColumns();
