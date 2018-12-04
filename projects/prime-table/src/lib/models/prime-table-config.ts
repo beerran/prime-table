@@ -45,6 +45,7 @@ export class PrimeTableConfig {
                 this.addButton = true;
                 this.scrollable = true;
                 this.rowsShown = 10;
+                this.export = false;
             break;
             case 'none':
             default:

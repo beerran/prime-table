@@ -29,27 +29,25 @@
     [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
     <ng-template pTemplate="caption">
         <div class="row">
-            <div class="col-6 col-md-2" *ngIf="_config.rowCount">
-                <p-dropdown class="pull-left" [options]="rowCount.options" [(ngModel)]="rowCount.selected"></p-dropdown>
-            </div>
-            <div class="col-6 col-md-3" *ngIf="_config.columnSettings.selectable" [class.col-md-5]="!_config.rowCount">
-                <p-multiSelect [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
-            </div>
-            <div class="col-12 col-md-7" [class.col-md-10]="!_config.columnSettings.selectable" [class.col-md-12]="!_config.rowCount && !_config.columnSettings.selectable">
-                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
-                <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
-                <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
-                <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>
-                <div class="btn-group ml-2 pull-right" role="group">
-                    <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-dark" type="button" (click)="selectedRows = []">{{_config.selectableRows.clearText}}</button>
-                    <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
-                </div>
-                <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
-            </div>
-        </div>
-        <div class="row" *ngIf="showFilters">
             <div class="col">
-                <input type="text" style="width:auto" class="form-control form-control-sm d-inline" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                <p-dropdown *ngIf="_config.rowCount" class="float-left" [options]="rowCount.options" [(ngModel)]="rowCount.selected"></p-dropdown>
+                <p-multiSelect *ngIf="_config.columnSettings.selectable" [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
+                <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
+            </div>
+            <div class="col-12 col-md-7">
+                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
+
+                <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
+                    <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
+                    <div class="input-group-append" *ngIf="_config.addButton">
+                        <button class="btn btn-sm btn-success" type="button" (click)="add.emit(true)">Add new</button>
+                    </div>
+                </div>
+                <ng-template #onlyAdd>
+                    <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
+                </ng-template>
+                <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
             </div>
         </div>
     </ng-template>
@@ -129,23 +127,25 @@
     [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null" (onEditComplete)="doSave($event)">
     <ng-template pTemplate="caption">
         <div class="row">
-            <div class="col-6 col-md-2" *ngIf="_config.rowCount">
-                <p-dropdown class="pull-left" [options]="rowCount.options" [(ngModel)]="rowCount.selected"></p-dropdown>
-            </div>
-            <div class="col-6 col-md-3" *ngIf="_config.columnSettings.selectable" [class.col-md-5]="!_config.rowCount">
-                <p-multiSelect [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
-            </div>
-            <div class="col-12 col-md-7" [class.col-md-10]="!_config.columnSettings.selectable" [class.col-md-12]="!_config.rowCount && !_config.columnSettings.selectable">
-                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
-                <button *ngIf="_config.filters" class="btn btn-sm btn-dark d-inline" type="button" (click)="toggleFilters()">Filters</button>
-                <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 d-inline" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
-                <button *ngIf="_config.addButton" class="btn btn-sm btn-success ml-2 pull-right" type="button" (click)="add.emit(true)">Add new</button>
-                <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
-            </div>
-        </div>
-        <div class="row" *ngIf="showFilters">
             <div class="col">
-                <input type="text" style="width:auto" class="form-control form-control-sm d-inline" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                <p-dropdown *ngIf="_config.rowCount" class="float-left" [options]="rowCount.options" [(ngModel)]="rowCount.selected"></p-dropdown>
+                <p-multiSelect *ngIf="_config.columnSettings.selectable" [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
+                <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
+            </div>
+            <div class="col-12 col-md-7">
+                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
+
+                <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
+                    <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
+                    <div class="input-group-append" *ngIf="_config.addButton">
+                        <button class="btn btn-sm btn-success" type="button" (click)="add.emit(true)">Add new</button>
+                    </div>
+                </div>
+                <ng-template #onlyAdd>
+                    <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
+                </ng-template>
+                <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
             </div>
         </div>
     </ng-template>
