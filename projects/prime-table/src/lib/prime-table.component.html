@@ -34,7 +34,7 @@
                 <p-multiSelect *ngIf="_config.columnSettings.selectable" [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
             </div>
-            <div class="col-12 col-md-7">
+            <div class="col-12 col-md-7 col-lg-5 offset-lg-2">
                 <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
 
                 <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
@@ -47,6 +47,8 @@
                 <ng-template #onlyAdd>
                     <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
                 </ng-template>
+            </div>
+            <div class="col">
                 <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
             </div>
         </div>
@@ -132,7 +134,7 @@
                 <p-multiSelect *ngIf="_config.columnSettings.selectable" [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
             </div>
-            <div class="col-12 col-md-7">
+            <div class="col-12 col-md-7 col-lg-5 offset-lg-2">
                 <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
 
                 <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
@@ -145,6 +147,8 @@
                 <ng-template #onlyAdd>
                     <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
                 </ng-template>
+            </div>
+            <div class="col">
                 <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
             </div>
         </div>

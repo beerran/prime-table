@@ -3,3 +3,76 @@
 @import '../dist/prime-table/scss/prime-table-styles.scss';
 @import '~primeicons/primeicons.css';
 @import "~ng-snotify/styles/material";
+$slider-height: 14px;
+$slider-position: 4px;
+$slider-width: ($slider-height * 2)+($slider-position * 3);
+label.switch-label {
+    margin: 0;
+    position: relative;
+    font-size: 0.8rem;
+    cursor: pointer;
+    &.big {
+        font-size: 1rem;
+    }
+}
+
+.switch {
+    position: relative;
+    top: $slider-height / 2;
+    display: inline-block;
+    width: $slider-width;
+    height: $slider-height + ($slider-position * 2);
+    input {
+        display: none;
+    }
+    margin:0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    &:before {
+        position: absolute;
+        content: "";
+        height: $slider-height;
+        width: $slider-height;
+        left: $slider-position;
+        bottom: $slider-position;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    &.round {
+        border-radius: $slider-height + ($slider-position * 2);
+        &:before {
+            border-radius: 50%;
+        }
+    }
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX($slider-width - $slider-height - ($slider-position * 2));
+    -ms-transform: translateX($slider-width - $slider-height - ($slider-position * 2));
+    transform: translateX($slider-width - $slider-height - ($slider-position * 2));
+}
+
+input:checked+.slider {
+    background-color: $green;
+    &.danger {
+        background-color: $red;
+    }
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px $green;
+    &.danger {
+        box-shadow: 0 0 1px $red;
+    }
+}
