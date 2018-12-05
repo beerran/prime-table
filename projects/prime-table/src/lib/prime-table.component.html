@@ -35,8 +35,6 @@
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
             </div>
             <div class="col-12 col-md-7 col-lg-5 offset-lg-2">
-                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
-
                 <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
                     <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
@@ -51,6 +49,11 @@
                     <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
                     <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary float-right ml-2 d-inline" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
                 </ng-template>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
             </div>
             <div class="col">
                 <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
@@ -139,8 +142,6 @@
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
             </div>
             <div class="col-12 col-md-7 col-lg-5 offset-lg-2">
-                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
-
                 <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
                     <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
@@ -151,6 +152,11 @@
                 <ng-template #onlyAdd>
                     <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
                 </ng-template>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
             </div>
             <div class="col">
                 <ng-container *ngTemplateOutlet="rightHeaderTemplate"></ng-container>
