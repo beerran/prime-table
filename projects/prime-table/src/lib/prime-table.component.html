@@ -25,8 +25,8 @@
 </ng-template>
 
 <p-table *ngIf="!_config.drilldown && _config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
-    selectionMode="multiple" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table selectable-rows-table" [class.table-sm]="_config.size === 'sm'"
-    [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
+    [selectionMode]="_config.selectableRows.multiple ? 'multiple' : 'single'" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table selectable-rows-table"
+    [class.table-sm]="_config.size === 'sm'" [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
     <ng-template pTemplate="caption">
         <div class="row">
             <div class="col">
@@ -43,9 +43,13 @@
                     <div class="input-group-append" *ngIf="_config.addButton">
                         <button class="btn btn-sm btn-success" type="button" (click)="add.emit(true)">Add new</button>
                     </div>
+                    <div class="input-group-append" *ngIf="_config.selectableRows.enabled">
+                        <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
+                    </div>
                 </div>
                 <ng-template #onlyAdd>
                     <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
+                    <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary float-right ml-2 d-inline" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
                 </ng-template>
             </div>
             <div class="col">

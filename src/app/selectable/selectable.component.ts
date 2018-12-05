@@ -1,8 +1,8 @@
 import { SnotifyService } from 'ng-snotify';
 import { Component, OnInit } from '@angular/core';
-import { PrimeTableConfig } from 'prime-table';
 import { BaseComponent } from '../base.component';
 import { SharedStuff } from '../shared';
+import { PrimeTableConfig } from 'projects/prime-table/src/public_api';
 
 @Component({
   selector: 'app-selectable',
@@ -22,8 +22,9 @@ export class SelectableComponent extends BaseComponent implements OnInit {
     this.tableConfig.onArchive = (item) => SharedStuff.onArchive(item, this.snotify);
     this.tableConfig.sortable = false;
     this.tableConfig.editButton = false;
+    this.tableConfig.filters = false;
     this.tableConfig.setColumns(SharedStuff.GetColumns());
     this.tableConfig.setData(SharedStuff.GetData());
-    this.tableConfig.selectableRows = {enabled: true, buttonText: 'Choose selected', clearText: 'X'};
+    this.tableConfig.selectableRows = {enabled: true, multiple: true, buttonText: 'Choose selected', clearText: 'X'};
   }
 }
