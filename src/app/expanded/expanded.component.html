@@ -3,7 +3,7 @@
 <b-prime-table [config]="tableConfig" (add)="onAdd($event)" (edit)="onEdit($event)">
     <div class="header-left d-inline float-left">
         <button class="btn btn-sm btn-primary mr-2 d-inline pull-left" type="button"><i class="fal fa-refresh"></i> Reload</button>
-        <button *ngIf="filteredParam" class="btn btn-sm btn-dark mx-2 d-inline pull-left" type="button"><i class="fal fa-times"></i> Show all</button>
+        <button class="btn btn-sm btn-dark d-inline pull-left" type="button"><i class="fal fa-times"></i> Show all</button>
     </div>
     <div class="header-right d-inline float-right">
         <label class="switch-label" for="archiveSwitch">Include archived</label>
