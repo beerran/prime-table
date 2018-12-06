@@ -32,7 +32,7 @@
             <div class="col">
                 <p-dropdown *ngIf="_config.rowCount" class="float-left" [options]="rowCount.options" [(ngModel)]="rowCount.selected"></p-dropdown>
                 <p-multiSelect *ngIf="_config.columnSettings.selectable" [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
-                <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
+                <button *ngIf="_config.export" class="btn btn-sm btn-dark float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
             </div>
             <div class="col-12 col-md-7 col-lg-5 offset-lg-2">
                 <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
@@ -51,7 +51,7 @@
                 </ng-template>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col">
                 <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
             </div>
@@ -139,7 +139,7 @@
             <div class="col">
                 <p-dropdown *ngIf="_config.rowCount" class="float-left" [options]="rowCount.options" [(ngModel)]="rowCount.selected"></p-dropdown>
                 <p-multiSelect *ngIf="_config.columnSettings.selectable" [options]="_config.columns" [(ngModel)]="selectedColumns" optionLabel="displayName" selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
-                <button *ngIf="_config.export" class="btn btn-sm btn-dark mx-2 float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
+                <button *ngIf="_config.export" class="btn btn-sm btn-dark float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
             </div>
             <div class="col-12 col-md-7 col-lg-5 offset-lg-2">
                 <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
@@ -154,7 +154,7 @@
                 </ng-template>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col">
                 <ng-container *ngTemplateOutlet="leftHeaderTemplate"></ng-container>
             </div>
