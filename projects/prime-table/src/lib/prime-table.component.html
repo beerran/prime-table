@@ -39,14 +39,14 @@
                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
                     <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
                     <div class="input-group-append" *ngIf="_config.addButton">
-                        <button class="btn btn-sm btn-success" type="button" (click)="add.emit(true)">Add new</button>
+                        <button class="btn btn-sm btn-success bg-success text-white" type="button" (click)="add.emit(true)">Add new</button>
                     </div>
                     <div class="input-group-append" *ngIf="_config.selectableRows.enabled">
                         <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
                     </div>
                 </div>
                 <ng-template #onlyAdd>
-                    <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
+                    <button *ngIf="_config.addButton" class="btn btn-sm btn-success bg-success text-white float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
                     <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary float-right ml-2 d-inline" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
                 </ng-template>
             </div>
@@ -146,11 +146,11 @@
                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
                     <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
                     <div class="input-group-append" *ngIf="_config.addButton">
-                        <button class="btn btn-sm btn-success" type="button" (click)="add.emit(true)">Add new</button>
+                        <button class="btn btn-sm btn-success bg-success text-white" type="button" (click)="add.emit(true)">Add new</button>
                     </div>
                 </div>
                 <ng-template #onlyAdd>
-                    <button *ngIf="_config.addButton" class="btn btn-sm btn-success float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
+                    <button *ngIf="_config.addButton" class="btn btn-sm btn-success bg-success text-white float-right ml-2 d-inline" type="button" (click)="add.emit(true)">Add new</button>
                 </ng-template>
             </div>
         </div>
