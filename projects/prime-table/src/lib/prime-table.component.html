@@ -25,7 +25,7 @@
 </ng-template>
 
 <p-table *ngIf="!_config.drilldown && _config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
-    [selectionMode]="_config.selectableRows.multiple ? 'multiple' : 'single'" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table selectable-rows-table"
+    [selectionMode]="_config.selectableRows.multiple ? 'multiple' : 'single'" [(selection)]="selectedRows" [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config?.data?.length > rowCount.selected : false" [rows]="rowCount.selected" class="table selectable-rows-table"
     [class.table-sm]="_config.size === 'sm'" [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key" [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null">
     <ng-template pTemplate="caption">
         <div class="row">
@@ -132,7 +132,7 @@
 </p-table>
 
 <p-table *ngIf="!_config.drilldown && !_config.selectableRows.enabled" [responsive]="_config.responsive" [autoLayout]="_config.autoLayout" (onRowReorder)="rowReordered($event)" #dt [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [resizableColumns]="_config.columnSettings.resizable"
-    [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config.data.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key"
+    [scrollHeight]="screenHeight" [paginator]="rowCount.selected ? _config?.data?.length > rowCount.selected : false" [rows]="rowCount.selected" class="table" [class.table-sm]="_config.size === 'sm'" [value]="_config.data" [columns]="selectedColumns" [dataKey]="_config.expandable.key"
     [sortField]="_config.orderBy?.key || null" [sortOrder]="_config.orderBy?.type === 'asc' ? 1 : -1 || null" (onEditComplete)="doSave($event)">
     <ng-template pTemplate="caption">
         <div class="row">
