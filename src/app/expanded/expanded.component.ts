@@ -20,6 +20,15 @@ export class ExpandedComponent extends BaseComponent implements OnInit {
     this.tableConfig.onArchive = (item) => SharedStuff.onArchive(item, this.snotify);
     this.tableConfig.sortable = false;
     this.tableConfig.editButton = false;
+    this.tableConfig.menu = {
+      enabled: true,
+      items: [
+          {
+            label: 'Menu item', icon: 'fa fa-plus', command: (event) => console.log(event)
+          }
+      ],
+      node: null
+    };
     this.tableConfig.setColumns(SharedStuff.GetColumns());
     this.tableConfig.setData(SharedStuff.GetData());
   }

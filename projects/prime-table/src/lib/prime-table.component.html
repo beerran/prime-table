@@ -1,4 +1,4 @@
-<p-contextMenu #cm appendTo="body" [model]="_config.menu.items" *ngIf="_config.menu.enabled"></p-contextMenu>
+<p-contextMenu #cm appendTo="body" [model]="_config.menu.items"></p-contextMenu>
 
 
 <p-treeTable *ngIf="_config.drilldown" [value]="_config.data" [(contextMenuSelection)]="_config.menu.node" [contextMenu]="cm" [columns]="selectedColumns" class="table" [class.table-sm]="_config.size === 'sm'">
