@@ -38,7 +38,7 @@ export class EditableComponent extends BaseComponent implements OnInit {
     cols = cols.slice(0, cols.length - 1);
     cols = [...cols, this.selectCol];
     this.tableConfig.sortable = false;
-    this.tableConfig.archiveButton = true;
+    this.tableConfig.archiveButton.enabled = true;
     this.tableConfig.setColumns(cols);
     this.tableConfig.setData(SharedStuff.GetData());
     this.tableConfig.onArchive = (item) => SharedStuff.onArchive(item, this.snotify);

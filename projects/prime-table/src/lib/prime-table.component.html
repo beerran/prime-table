@@ -69,7 +69,7 @@
                 <p-sortIcon [field]="col.name"></p-sortIcon>
             </th>
             <th *ngIf="_config.editButton">Edit</th>
-            <th *ngIf="_config.archiveButton">Archive</th>
+            <th *ngIf="_config.archiveButton.enabled">{{_config.archiveButton.archiveText}}</th>
         </tr>
         <ng-template #unsortableRow>
             <tr>
@@ -79,7 +79,7 @@
                     {{col.displayName || col.name}}
                 </th>
                 <th *ngIf="_config.editButton">Edit</th>
-                <th *ngIf="_config.archiveButton">Archive</th>
+                <th *ngIf="_config.archiveButton.enabled">{{_config.archiveButton.archiveText}}</th>
             </tr>
         </ng-template>
     </ng-template>
@@ -118,7 +118,7 @@
                 </ng-template>
             </td>
             <td *ngIf="_config.editButton"><button class="btn btn-xs btn-dark" (click)="edit.emit(row)">Edit</button></td>
-            <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row.archived ? 'Restore' : 'Archive'}}</ng-template></button></td>
+            <td *ngIf="_config.archiveButton.enabled"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row?.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row?.archived ? _config.archiveButton.restoreText : _config.archiveButton.archiveText}}</ng-template></button></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">
@@ -172,7 +172,7 @@
                 <p-sortIcon [field]="col.name"></p-sortIcon>
             </th>
             <th *ngIf="_config.editButton">Edit</th>
-            <th *ngIf="_config.archiveButton">Archive</th>
+            <th *ngIf="_config.archiveButton.enabled">{{_config.archiveButton.archiveText}}</th>
         </tr>
         <ng-template #unsortableRow>
             <tr>
@@ -182,7 +182,7 @@
                     {{col.displayName || col.name}}
                 </th>
                 <th *ngIf="_config.editButton">Edit</th>
-                <th *ngIf="_config.archiveButton">Archive</th>
+                <th *ngIf="_config.archiveButton.enabled">{{_config.archiveButton.archiveText}}</th>
             </tr>
         </ng-template>
     </ng-template>
@@ -221,7 +221,7 @@
                 </ng-template>
             </td>
             <td *ngIf="_config.editButton"><button class="btn btn-xs btn-dark" (click)="edit.emit(row)">Edit</button></td>
-            <td *ngIf="_config.archiveButton"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row.archived ? 'Restore' : 'Archive'}}</ng-template></button></td>
+            <td *ngIf="_config.archiveButton.enabled"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row?.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row?.archived ? _config.archiveButton.restoreText : _config.archiveButton.archiveText}}</ng-template></button></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">

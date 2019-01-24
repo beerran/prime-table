@@ -11,7 +11,7 @@ export class PrimeTableConfig {
             case 'easy':
                 this.addButton = true;
                 this.editButton = true;
-                this.archiveButton = true;
+                this.archiveButton.enabled = true;
                 this.export = false;
                 this.size = 'sm';
                 this.scrollable = false;
@@ -63,7 +63,11 @@ export class PrimeTableConfig {
     public scrollable = false;
     public addButton = false;
     public editButton = false;
-    public archiveButton = false;
+    public archiveButton = {
+        enabled: false,
+        archiveText: 'Archive',
+        restoreText: 'Restore'
+    };
     public responsive = true;
     public autoLayout = true;
     public rowsShown: number = null;
