@@ -118,7 +118,7 @@
                 </ng-template>
             </td>
             <td *ngIf="_config.editButton"><button class="btn btn-xs btn-dark" (click)="edit.emit(row)">Edit</button></td>
-            <td *ngIf="_config.archiveButton.enabled"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row?.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row?.archived ? _config.archiveButton.restoreText : _config.archiveButton.archiveText}}</ng-template></button></td>
+            <td *ngIf="_config.archiveButton.enabled"><button class="btn btn-xs" [disabled]="row?.isArchiving" [ngClass]="row?.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row?.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row?.archived ? _config.archiveButton.restoreText : _config.archiveButton.archiveText}}</ng-template></button></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">
@@ -221,7 +221,7 @@
                 </ng-template>
             </td>
             <td *ngIf="_config.editButton"><button class="btn btn-xs btn-dark" (click)="edit.emit(row)">Edit</button></td>
-            <td *ngIf="_config.archiveButton.enabled"><button class="btn btn-xs" [disabled]="row.isArchiving" [ngClass]="row?.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row?.archived ? _config.archiveButton.restoreText : _config.archiveButton.archiveText}}</ng-template></button></td>
+            <td *ngIf="_config.archiveButton.enabled"><button class="btn btn-xs" [disabled]="row?.isArchiving" [ngClass]="row?.archived ? 'btn-dark' : 'btn-danger'" (click)="doArchive(row)"><i *ngIf="row?.isArchiving; else notArchiving" class="fa fa-spin fa-spinner"></i><ng-template #notArchiving>{{row?.archived ? _config.archiveButton.restoreText : _config.archiveButton.archiveText}}</ng-template></button></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-row let-columns="columns" *ngIf="_config.expandable.enabled">
