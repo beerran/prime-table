@@ -85,6 +85,11 @@ export class PrimeTableComponent implements OnInit {
     this.onResize();
   }
 
+  onSelectedEmit(rows: any[]): void {
+    this.selected.emit(rows);
+    this.selectedRows = [];
+  }
+
   ngOnInit() {
       // ToDo: Fix for drilldown tables
       this.dataLoaded.subscribe(dataLoaded => {
