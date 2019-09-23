@@ -22,7 +22,7 @@ export class SelectableComponent extends BaseComponent implements OnInit {
     this.tableConfig.onArchive = (item) => SharedStuff.onArchive(item, this.snotify);
     this.tableConfig.sortable = false;
     this.tableConfig.editButton = false;
-    this.tableConfig.filters = false;
+    this.tableConfig.filters = true;
     this.tableConfig.setColumns(SharedStuff.GetColumns());
     this.tableConfig.setData(SharedStuff.GetData());
     this.tableConfig.selectableRows = {enabled: true, multiple: true, buttonText: 'Choose selected', clearText: 'X'};

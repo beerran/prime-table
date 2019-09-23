@@ -35,14 +35,13 @@
                 <button *ngIf="_config.export" class="btn btn-sm btn-dark float-left" type="button" pButton iconPos="left" label="All Data" (click)="dt.exportCSV()">Export</button>
             </div>
             <div class="col-12 col-md-7 col-lg-5 offset-lg-2">
-                <div *ngIf="_config.filters; else onlyAdd">
-                    <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
-                        <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
-                        <div class="input-group-append" *ngIf="_config.addButton">
-                            <button class="btn btn-sm btn-success bg-success text-white" type="button" (click)="add.emit(true)">Add new</button>
-                        </div>
+                <div class="input-group input-group-sm" *ngIf="_config.filters; else onlyAdd">
+                    <button *ngIf="_config.selectableRows.enabled" [disabled]="selectedRows?.length <= 0" class="btn btn-sm btn-primary mr-2" type="button" (click)="selected.emit(selectedRows)">{{_config.selectableRows.buttonText}}</button>
+
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
+                    <input *ngIf="_config.filters" type="text" class="form-control form-control-sm" pInputText placeholder="Search.." (input)="dt.filterGlobal($event.target.value, 'contains')">
+                    <div class="input-group-append" *ngIf="_config.addButton">
+                        <button class="btn btn-sm btn-success bg-success text-white" type="button" (click)="add.emit(true)">Add new</button>
                     </div>
                 </div>
 
